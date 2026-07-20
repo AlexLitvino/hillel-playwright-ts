@@ -221,3 +221,44 @@ use: {
 
 Installing Playwright
 https://playwright.dev/docs/intro#installing-playwright
+
+
+# 18 Пошук елементів
+To pass first authorization add to config:
+```
+    baseURL: "https://qauto.forstudy.space/",
+
+    httpCredentials: {
+      username: USERNAME,
+      password: PASSWORD
+    },
+```
+Specifying baseURL in config, no need to pass full path in goto.
+
+page.locator doesn't require await, it is needed only when interacting with element.
+```
+page.locator(XPATH|CSS)
+```
+
+getByRole
+```
+page.getByRole(ROLE)
+```
+List of roles
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles
+
+
+- getByText
+- getByPlaceholder
+- getByAltText
+- getByLabel - find input field related to label
+- getByTitle
+- getByTestId - by default looks for attribute data-testid. It could be changed in config use: testIdAttribute option.
+
+Playwright is looking for element at the moment of interaction with that element.
+
+Locators API
+https://playwright.dev/docs/locators
+
+Auto-waiting
+https://playwright.dev/docs/actionability
