@@ -262,3 +262,36 @@ https://playwright.dev/docs/locators
 
 Auto-waiting
 https://playwright.dev/docs/actionability
+
+
+# 19 Фільтрація елементів та масиви елементів
+locator.filter():
+- has - by child element (page.locator("//a").filter({has: page.locator('span.icon-telegram')}))
+- hasNot
+- hasText - by text
+- hasNotText
+
+Short form:
+```
+page.locator("//button", {hasText: "Sign"});
+```
+
+getByRole could be used with name:
+```
+page.getByRole('button', {name: "Sign up"})
+```
+
+Locator method could be used on other locator to search inside:
+```
+await page.locator("//nav").locator('//a').highlight();
+```
+
+Collections methods:
+- count
+- first
+- last
+- nth(index) - index starts from 0
+- all - returns array of elements from locators
+
+Filtering Locators
+https://playwright.dev/docs/locators#filtering-locators
