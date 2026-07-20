@@ -58,3 +58,166 @@ img[srcset]
 //table//tr//th[contains(text(), "Location")]/following-sibling::td//li
 //img[@srcset]
 ```
+
+
+# 17 Playwright Intro та встановлення
+Cross-browser:
+- Chromium
+- WebKit
+- FireFox
+
+Cross-platform:
+- Windows
+- Linux
+- macOS
+
+Cross-language:
+- TS
+- JS
+- Python
+- .NET
+- Java
+
+Test mobile web
+
+Auto-wait
+
+Installation:
+```
+npm init playwright@latest
+```
+
+Choose the following options during installation
+```
+✔ Do you want to use TypeScript or JavaScript? · TypeScript
+✔ Where to put your end-to-end tests? · tests
+✔ Add a GitHub Actions workflow? (Y/n) · false
+✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+? Install Playwright operating system dependencies (requires sudo / root - can be done manually via 'sudo npx playwright install-deps')? (y/N) ‣ false
+```
+
+To install browsers manually:
+```
+npx playwright install
+```
+To install specific browser:
+```
+npx playwright install webkit
+npx playwright install chromium
+npx playwright install firefox
+npx playwright install msedge
+```
+
+From installation:
+Inside that directory, you can run several commands:
+
+  npx playwright test
+    Runs the end-to-end tests.
+
+  npx playwright test --ui
+    Starts the interactive UI mode.
+
+  npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  npx playwright test example
+    Runs the tests in a specific file.
+
+  npx playwright test --debug
+    Runs the tests in debug mode.
+
+  npx playwright codegen
+    Auto generate tests with Codegen.
+
+We suggest that you begin by typing:
+
+    npx playwright test
+
+And check out the following files:
+  - ./tests/example.spec.ts - Example end-to-end test
+  - ./playwright.config.ts - Playwright Test configuration
+
+Visit https://playwright.dev/docs/intro for more information.
+
+Test file should follow naming: *.spec.ts
+
+Test
+```
+test(title, callback)
+```
+
+```
+import { test, expect } from '@playwright/test';
+
+test('basic test', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+  const name = await page.innerText('.navbar__title');
+  expect(name).toBe('Playwright');
+});
+```
+
+test.describe(title, callback) to specify test suite:
+```
+test.describe('two tests', () => {
+	test('one', async ({ page }) => {
+	// ...
+	});
+
+	test('two', async ({ page }) => {
+	// ...
+	});
+});
+```
+
+To run tests:
+```
+npx playwright test
+```
+
+To run tests in headed mode:
+```
+npx playwright test --headed
+```
+
+Hooks:
+- test.beforeEach
+- test.afterEach
+- test.beforeAll
+- test.afterAll
+
+Extension Playwright Test for VS Code
+
+Run file with tests (example - part of file name):
+```
+npx playwright test example
+```
+
+Run test by name
+```
+npx playwright test -g "has title"
+```
+
+Run tests for specific project
+```
+npx playwright test --project=chromium
+```
+
+To skip tests:
+```
+test.describe.skip
+test.skip
+```
+
+test.only - to run tests with "only" marker
+
+To capture screenshots and video to report:
+```
+use: {
+    trace: "on",
+    screenshot: "on",
+    video: "on"
+}
+```
+
+Installing Playwright
+https://playwright.dev/docs/intro#installing-playwright
