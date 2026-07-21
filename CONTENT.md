@@ -295,3 +295,41 @@ Collections methods:
 
 Filtering Locators
 https://playwright.dev/docs/locators#filtering-locators
+
+
+# 20 Виконання дій користувача (Actions) у тестах
+Actions:
+- on element https://playwright.dev/docs/api/class-locator#methods
+- on page https://playwright.dev/docs/api/class-page#methods
+
+Actions on element:
+- click
+- dblclick
+- fill
+- pressSequentially - don't clear text field
+- press
+- check
+- uncheck
+- isChecked
+- selectOption - supports array for multiselect
+- hover
+- focus
+- blur
+- scrollIntoViewIfNeeded
+
+Actions on page:
+- goto
+- reload
+- url
+
+Locator methods
+https://playwright.dev/docs/api/class-locator#methods
+
+Page methods
+https://playwright.dev/docs/api/class-page#methods
+
+Actions
+https://playwright.dev/docs/input
+
+File upload
+https://playwright.dev/docs/input#upload-files
