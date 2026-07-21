@@ -333,3 +333,47 @@ https://playwright.dev/docs/input
 
 File upload
 https://playwright.dev/docs/input#upload-files
+
+
+# 21 Перевірки результатів за допомогою Assertions
+```
+expect(entity).check();
+expect(entity).not.check();
+```
+
+Assertions:
+- Auto-retrying
+- Non-retrying
+
+Auto-retrying Assertions:
+- toBeVisible
+- toHaveText
+- toContainText
+- toHaveValue
+- toHaveClass 
+- toHaveCSS
+- toBeChecked
+- toHaveCount
+- toHaveURL
+
+Non-retrying Assertions:
+- toBe
+- toHaveLength
+- toContain
+
+Soft assertions
+```
+// Make a few checks that will not stop the test when failed...
+await expect.soft(page.getByTestId('status')).toHaveText('Success');
+await expect.soft(page.getByTestId('eta')).toHaveText('1 day');
+
+// Avoid running further if there were soft assertion failures.
+expect(test.info().errors).toHaveLength(0);
+```
+
+
+Assertions
+https://playwright.dev/docs/test-assertions
+
+Soft assertions
+https://playwright.dev/docs/test-assertions#soft-assertions
