@@ -377,3 +377,22 @@ https://playwright.dev/docs/test-assertions
 
 Soft assertions
 https://playwright.dev/docs/test-assertions#soft-assertions
+
+
+# 22 Генерація тестів за допомогою CodeGen
+To start codegen
+```
+npx playwright codegen <URL>
+```
+
+Or it could be run from VS Code extension: Record new button - it will record script to new file.
+To check locators you could use Pick locator button from extension.
+
+To clean up tests:
+- move navigation to test.beforeEach
+- move opening sign in form to test.beforeEach
+- remove clicking on text fields before entering text
+- change highlighting and unfocus fields with focus( and blur(methods))
+
+Test generator
+https://playwright.dev/docs/codegen
