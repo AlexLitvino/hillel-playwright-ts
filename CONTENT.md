@@ -1,3 +1,7 @@
+Original lessons code: 
+https://github.com/playwright-course-hillel/pw-course-playwright-repo
+
+
 # 16 Використання DevTools та селекторів елементів у браузері
 
 Selectors priorities:
@@ -396,3 +400,12 @@ To clean up tests:
 
 Test generator
 https://playwright.dev/docs/codegen
+
+
+# 23 Page Object Model (POM) та структура фреймворку
+
+Page object models
+https://playwright.dev/docs/pom
+
+Best Practices
+https://playwright.dev/docs/best-practices
