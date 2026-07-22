@@ -409,3 +409,57 @@ https://playwright.dev/docs/pom
 
 Best Practices
 https://playwright.dev/docs/best-practices
+
+
+# 24 Використання Storage State та Projects
+After login use context.storageState to save cookie in file.
+After that use test.use({ storageState: '.states/auth.json' }); to load cookies.
+
+```
+test.use({ storageState: '.states/auth.json' });
+
+test.beforeAll(() => {
+  // Log in
+
+  await context.storageState({path: "auth.json"});  // Save cookie
+})
+```
+
+To run login before tests projects could be used.
+Create script with successful login in setup/*.setup.ts.
+
+In projects add project with setup:
+```
+  projects: [
+    {
+      name: 'setup',
+      testMatch: '**/setup/**.setup.ts'
+    },   
+```
+
+In target project add `dependencies: ['setup']`.
+storageState could be added if setup should be run before any test in project.
+```
+  projects: [
+    { name: 'setup', testMatch: '**/*.setup.ts' },           // setup-проєкт
+    { name: 'tests',
+      use: { ...devices['Desktop Chrome'], storageState: 'storageState.json' },
+      dependencies: ['setup'],
+    },
+```
+
+To run tests from extension, select both setup and e2e projects in extension.
+
+To clear state before test run:
+```
+test.use({ storageState: { cookies: [], origins: [] } });
+```
+
+Authentication
+https://playwright.dev/docs/auth
+
+Projects
+https://playwright.dev/docs/test-projects
+
+Configuration (multiple environments)
+https://playwright.dev/docs/test-configuration
