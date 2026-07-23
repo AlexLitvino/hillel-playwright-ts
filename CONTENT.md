@@ -513,3 +513,34 @@ Line `await use(page);` is passing fixture back, what is written before - is pre
 
 Fixtures
 https://playwright.dev/docs/test-fixtures
+
+
+# 26 Робота з CLI та командним рядком
+
+```
+npx playwright test // run all tests
+
+npx playwright test tests/fixtures.spec.ts tests/signin.spec.ts  // run tests from specific files
+
+npx playwright test signin  // run tests from file with partial match
+
+npx playwright test my-spec.ts:42  // run test from file on specific line
+
+npx playwright test -g "BMW"  // run tests with partial math of name
+
+npx playwright test -headed  // run tests in headed mode (browser is visible)
+
+npx playwright test --project="setup"  // run all tests of project
+
+npx playwright test --ui  // run test in UI mode
+
+npx playwright show-report  // show report of last run
+
+npx playwright test --debug  // run tests in debug mode
+
+npx playwright test --workers=1  // set max number of worker (CLI option will overwrite option from config file)
+
+npx playwright test --config <CONFIG_FILE>
+```
+
+[Command line](https://playwright.dev/docs/test-cli)

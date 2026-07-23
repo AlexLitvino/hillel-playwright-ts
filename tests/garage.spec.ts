@@ -3,7 +3,7 @@ import { GaragePage } from "../pom/pages/GaragePage";
 import { HomePage } from "../pom/pages/HomePage";
 import { SignInForm } from "../pom/forms/SignInForm";
 import { AddCarForm } from "../pom/forms/AddCarForm";
-import { validUser } from "../test-data/users";
+import { testUser1 } from "../test-data/users";
 
 test.describe('Garage tests', () => {
     let garagePage: GaragePage;
@@ -11,7 +11,7 @@ test.describe('Garage tests', () => {
     let signInForm: SignInForm;
     let addCarForm: AddCarForm;
 
-    test.use({ storageState: '.states/auth.json' });
+    test.use({ storageState: '.states/testuser1.json' });
 
     test.beforeEach(async ({ page }) => {
         homePage = new HomePage(page);
@@ -21,7 +21,7 @@ test.describe('Garage tests', () => {
 
         // await homePage.navigate();
         // await homePage.openSignInForm();
-        // await signInForm.signInWithCredentials(validUser.email, validUser.password)
+        // await signInForm.signInWithCredentials(testUser1.email, testUser1.password)
         // expect(garagePage.pageHeading).toBeVisible();
 
         // await garagePage.openAddCarForm();
