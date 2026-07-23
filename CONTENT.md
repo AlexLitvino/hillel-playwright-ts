@@ -566,3 +566,74 @@ Debugging:
 Traces could be downloaded in zip file and then viewed in trace.playwright.dev
 
 [Debugging Tests](https://playwright.dev/docs/debug)
+
+
+# 28 Використання змінних середовища (Environment Variables)
+Envvar in Windows command line:
+```
+set VARIABLE_NAME=value
+```
+
+Envvar in PowerShell:
+```
+$env:ENVIRONMENT_VARIABLE_NAME="value"
+```
+
+Envvar in Linux
+```
+export ENV_VAR=123456
+```
+
+To run command with set envvar
+```
+VARIABLE_NAME=value npx playwright test
+```
+
+Using in tests:
+```
+console.log(process.env.ENV_VAR);
+```
+
+Install dotenv library
+```
+npm install dotenv
+```
+
+In playwright.config.ts config file add:
+```
+require('dotenv').config();
+
+    httpCredentials: {
+      username: process.env.HTTP_USERNAME!,
+      password: process.env.HTTP_PASSWORD!
+    },
+```
+
+Create .env file:
+```
+HTTP_USERNAME = "guest"
+HTTP_PASSWORD = "welcome2qauto"
+```
+
+For another environment another .env file could be created (for example .env.test).
+Then in config file, path to this .env file should be specified:
+```
+require('dotenv').config({
+  path: ".env.test"
+});
+```
+Or it could be set this way (path required environment as envvar or use .env.local):
+```
+require('dotenv').config({
+  path: `.env.${process.env.ENV} || local`;
+});
+```
+
+Configuration
+https://playwright.dev/docs/test-configuration
+
+process.env
+https://nodejs.org/api/process.html#processenv
+
+dotenv
+https://www.npmjs.com/package/dotenv
