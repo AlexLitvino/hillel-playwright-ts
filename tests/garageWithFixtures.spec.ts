@@ -14,6 +14,7 @@ test.describe('Garage tests', () => {
     test.describe('Adding cars', () => {
         test('Add new car - BMW X5', async ({ app }) => {
             await app.addCarForm.addNewCar('BMW', 'X5', '999');
+            //await app.page.pause();
             await app.garagePage.verifyCarIsAdded('BMW X5', '999');
         })
 

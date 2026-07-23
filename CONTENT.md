@@ -544,3 +544,25 @@ npx playwright test --config <CONFIG_FILE>
 ```
 
 [Command line](https://playwright.dev/docs/test-cli)
+
+
+# 27 Налагодження та Debugging у тестах
+Debugging:
+- Using --headed option with slowMo
+```
+  use: {
+    launchOptions: {
+      slowMo: 1000,
+    }
+```
+- Using VS Code extension (set breakpoint, run using right-click and Debug test)
+- Using --debug option of Playwright
+- Placing page.pause() in test
+- Using --ui option
+- Using PWDEBUG=console before command to run test (Linux/mac), running $env:PWDEBUG="console" (Windows). It is used together with page.pause(). Then after opening browser, object playwright will be accessible in Console.
+- Verbose API Logs: run tests using envvar DEBUG=pw:api 
+- Traces in reports
+
+Traces could be downloaded in zip file and then viewed in trace.playwright.dev
+
+[Debugging Tests](https://playwright.dev/docs/debug)
