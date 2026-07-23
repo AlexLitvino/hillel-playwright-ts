@@ -463,3 +463,53 @@ https://playwright.dev/docs/test-projects
 
 Configuration (multiple environments)
 https://playwright.dev/docs/test-configuration
+
+
+# 25 Використання Fixtures (Фікстур) для оптимізації коду
+browser -> context -> page
+
+To create fixture import fixture test but rename it to base.
+```
+import { test as base, Page } from '@playwright/test';
+```
+
+Create type with list of fixtures:
+```
+type ScreenSizes = {
+    smallScreen: Page;
+    mediumScreen: Page;
+    bigScreen: Page;
+
+};
+```
+Type is created to allow intellisyntax when using fixture in tests.
+
+Create fixtures body extending test fixture and re-assigning it.
+Every fixture is separate function in extension:
+```
+export const test = base.extend<ScreenSizes>({
+    smallScreen: async ({ page }, use) => {
+        await page.setViewportSize({ width: 300, height: 300 });
+        await use(page);
+        console.log('Test with small screen is finished');
+    },
+    mediumScreen: async ({ page }, use) => {
+        await page.setViewportSize({ width: 600, height: 600 });
+        await use(page);
+        console.log('Test with medium screen is finished');
+    },
+    bigScreen: async ({ page }, use) => {
+        await page.setViewportSize({ width: 1000, height: 1000 });
+        await use(page);
+        console.log('Test with big screen is finished');
+    },
+
+
+});
+export { expect } from '@playwright/test';  // not clear what this does?
+```
+
+Line `await use(page);` is passing fixture back, what is written before - is pre-condition, what is written after - is post-condition.
+
+Fixtures
+https://playwright.dev/docs/test-fixtures
