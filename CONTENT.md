@@ -748,3 +748,67 @@ https://support.testrail.com/hc/en-us/articles/9682231778324-Integrating-with-Pl
 
 Zephyr reporter for Playwright
 https://www.npmjs.com/package/playwright-zephyr
+
+
+# 30 Screenshot testing
+## Verifying screenshots
+To verify screenshot add (might be default file name)
+```
+await expect(app.page).toHaveScreenshot("add-car-no-milage-page.png");
+```
+
+It is possible to verify specific element on page:
+```
+await expect(app.page.locator('.car-item').first()).toHaveScreenshot("last-added-audi-q7.png");
+```
+
+By default screenshots are saved in test directory in directory named by test file. It could be changed in config file:
+```
+  snapshotDir: "./test-data/screenshots",
+```
+
+If test fails, difference will be saved in test-results directory.
+
+If tests expectedly failed on screenshot, you could:
+- update expected screenshot to actual screenshot, or
+- re-run tests with --update-snapshots option
+
+If we need to mask some dynamic elements on screen, they should be added to mask array:
+```
+await expect(app.page.locator('.car-item').first()).toHaveScreenshot("last-added-audi-q7.png", {mask: [app.page.locator('[name="miles"]')]});
+```
+
+It is possible to set the max difference between screenshots in pixels:
+```
+await expect(app.page.locator('.car-item').first()).toHaveScreenshot("last-added-audi-q7.png", {maxDiffPixels: 61});
+```
+Or it could be set in percent as maxDiffPixelsRatio.
+
+To have the same screenshots better to set common view port size:
+```
+ page.setViewportSize(...)
+```
+Or in config
+```
+use: { viewport: { width, height } }
+```
+
+To make stable screenshots better wait for end of network communication or make sure that element is visible:
+```
+await page.waitForLoadState('networkidle')
+await expect(locator).toBeVisible() 
+```
+
+## Creating screenshots
+Screenshots could be made for page and for elements
+```
+            await app.page.screenshot({path: 'AddedCar.png', fullPage: true});
+            await app.page.locator('.car-item').first().screenshot({path: "Audi Q7.png"});
+```
+By default for page screenshot will be taken only for visible part. Setting `fullPage: true` will make screenshot and for not-visible part of page.
+
+Visual comparisons
+https://playwright.dev/docs/test-snapshots
+
+Screenshots
+https://playwright.dev/docs/screenshots
