@@ -1,5 +1,6 @@
 import { Locator, expect } from '@playwright/test'
 import { BasePage } from './BasePage';
+import { step } from '../../utils/reports/decorator';
 
 export class GaragePage extends BasePage {
     public readonly pageHeading: Locator = this.page.getByRole('heading', { name: 'Garage' });
@@ -22,6 +23,7 @@ export class GaragePage extends BasePage {
         await this.editCarIcons.nth(carIndex).click();
     }
 
+    @step("Verify car is added")
     async verifyCarIsAdded(carName: string, carMileage: string) {
         await expect(this.successAddingMessage).toBeVisible();
         await expect(this.lastAddedCarName).toHaveText(carName);

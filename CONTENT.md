@@ -637,3 +637,114 @@ https://nodejs.org/api/process.html#processenv
 
 dotenv
 https://www.npmjs.com/package/dotenv
+
+
+# 29 Репортинг і створення звітів про виконання тестів
+Reporters:
+- built-in
+- 3rd-party
+- cloud
+
+Reporter could be specified as CLI option
+```
+npx playwright test --reporter=line
+```
+
+Or in config file:
+```
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  reporter: 'line',
+});
+```
+
+To set several reporters in config (html reporter wouldn't never be automatically open, default value - on failure):
+```
+export default defineConfig({
+  reporter: [['line'], ['html', open: "never"]],
+});
+```
+
+## Built-in reporters
+Built-in reporters:
+- list
+- line
+- dot
+- html
+- blob
+- json
+- junit
+- GitHub Actions annotations
+
+To have more general steps in HTML report wrap steps in script with test.step:
+```
+        test.only('Add new car - Audi Q7', async ({ app }) => {
+            test.step("Adding Audi Q7 with 999 miles", async () => {
+                await app.addCarForm.addNewCar('Audi', 'Q7', '999');
+            })
+            test.step("Verifying that Audi Q7 with 999 miles is added", async () => {
+                await app.garagePage.verifyCarIsAdded('Audi Q7', '555');
+            })
+        })
+```
+
+Or you could use specific decorators for POM.
+
+## Allure
+Install Allure library
+```
+npm install -D allure-playwright
+```
+
+Install Allure to your machine
+
+Set allure reporter:
+```
+  reporter: "allure-playwright",
+```
+
+Generate report:
+```
+allure generate ./allure-results -o ./allure-report
+```
+
+Open report:
+```
+allure open ./allure-report
+```
+
+Other 3rd-party reporters:
+- Mochawesome
+- Monocart
+- ReportPortal
+
+## Cloud
+TMS:
+- Testmo
+- Testomat.io
+- TestRail
+- Qase
+- Azure Test Plans (Azure DevOps)
+- Zephyr (Jira)
+
+Reporters
+https://playwright.dev/docs/test-reporters
+
+allure-playwright
+https://www.npmjs.com/package/allure-playwright
+
+testomat.io
+https://testomat.io/
+
+Playwright Test Management & Reporting with Testmo
+https://www.testmo.com/tools/playwright-test-management/
+
+Integrating Qase with Playwright
+https://www.qase.io/blog/integrating-qase-with-playwright/
+
+TestRail Integrating with Playwright
+https://support.testrail.com/hc/en-us/articles/9682231778324-Integrating-with-Playwright
+
+Zephyr reporter for Playwright
+https://www.npmjs.com/package/playwright-zephyr

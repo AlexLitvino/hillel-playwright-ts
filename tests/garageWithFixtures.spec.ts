@@ -18,9 +18,13 @@ test.describe('Garage tests', () => {
             await app.garagePage.verifyCarIsAdded('BMW X5', '999');
         })
 
-        test('Add new car - Audi Q7', async ({ app }) => {
-            await app.addCarForm.addNewCar('Audi', 'Q7', '999');
-            await app.garagePage.verifyCarIsAdded('Audi Q7', '999');
+        test.only('Add new car - Audi Q7', async ({ app }) => {
+            test.step("Adding Audi Q7 with 999 miles", async () => {
+                await app.addCarForm.addNewCar('Audi', 'Q7', '999');
+            })
+            test.step("Verifying that Audi Q7 with 999 miles is added", async () => {
+                await app.garagePage.verifyCarIsAdded('Audi Q7', '555');
+            })
         })
 
         test.afterEach(async ({ app }) => {

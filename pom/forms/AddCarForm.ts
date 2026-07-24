@@ -1,5 +1,6 @@
 import { expect, Locator } from '@playwright/test'
 import { BaseForm } from './BaseForm';
+import { step } from '../../utils/reports/decorator';
 
 export class AddCarForm extends BaseForm {
 
@@ -14,7 +15,7 @@ export class AddCarForm extends BaseForm {
     private readonly lastAddedCarName = this.page.locator('.car_name.h2 ').first();
     private readonly lastAddedCarMileageField = this.page.locator('[name="miles"]').first();
 
-
+    @step("Add new car")
     async addNewCar(brand: string, model: string, mileage: string) {
         await this.selectBrand(brand);
         await this.selectModel(model);
