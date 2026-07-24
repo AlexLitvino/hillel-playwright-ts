@@ -18,13 +18,16 @@ test.describe('Garage tests', () => {
             await app.garagePage.verifyCarIsAdded('BMW X5', '999');
         })
 
-        test.only('Add new car - Audi Q7', async ({ app }) => {
+        test('Add new car - Audi Q7', async ({ app }) => {
             test.step("Adding Audi Q7 with 999 miles", async () => {
                 await app.addCarForm.addNewCar('Audi', 'Q7', '999');
             })
             test.step("Verifying that Audi Q7 with 999 miles is added", async () => {
-                await app.garagePage.verifyCarIsAdded('Audi Q7', '555');
+                await app.garagePage.verifyCarIsAdded('Audi Q7', '999');
             })
+            await expect(app.page.locator('.car-item').first()).toHaveScreenshot("last-added-audi-q7.png", {mask: [app.page.locator('[name="miles"]')]});
+            // await app.page.screenshot({path: 'AddedCar.png', fullPage: true});
+            // await app.page.locator('.car-item').first().screenshot({path: "Audi Q7.png"});
         })
 
         test.afterEach(async ({ app }) => {
@@ -38,6 +41,7 @@ test.describe('Garage tests', () => {
         await app.addCarForm.selectBrand('BMW');
         await app.addCarForm.selectModel('X5');
         await expect(app.addCarForm.addCarButton).toBeDisabled();
+        await expect(app.page).toHaveScreenshot("add-car-no-milage-page.png");
     })
 
     test('Close "Add a car" form via "Cancel" button', async ({ app }) => {
