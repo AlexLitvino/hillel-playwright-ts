@@ -812,3 +812,44 @@ https://playwright.dev/docs/test-snapshots
 
 Screenshots
 https://playwright.dev/docs/screenshots
+
+
+# 31 Прості запити (GET, POST, PUT, DELETE) без авторизації
+For sending requests without authorization `request` fixture is used:
+```
+test('Get all posts', async ({ request }) => {
+    const response = await request.get('https://jsonplaceholder.typicode.com/posts');
+    const posts = await response.json();
+    expect(response.status()).toBe(200);
+    expect(posts).toHaveLength(100);
+})
+```
+
+It has methods for sending all REST API methods:
+- get
+- post
+- put
+- delete and others
+
+APIResponse methods:
+- response.status()
+- response.statusText()
+- response.ok()
+- response.headers()
+- response.json()
+- response.text()
+
+Fake API
+https://jsonplaceholder.typicode.com/
+
+API testing
+https://playwright.dev/docs/api-testing
+
+APIRequestContext
+https://playwright.dev/docs/api/class-apirequestcontext
+
+Що таке API: простими словами про складне
+https://hostiq.ua/blog/ukr/what-is-api/
+
+HTTP request methods
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods
