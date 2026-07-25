@@ -853,3 +853,90 @@ https://hostiq.ua/blog/ukr/what-is-api/
 
 HTTP request methods
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods
+
+
+# 32 Запити із авторизацією
+To remove notification in console from dotenv library, add to .env file
+```
+DOTENV_CONFIG_QUIET = true
+```
+
+Authorization methods:
+- Basic Auth (HTTP Basic Authentication)
+- Bearer Token (for example JWT)
+- Cookie-based Authentication
+
+
+If perform authorization request and adding new car in scope of one test, no need to pass sid to add new car request, because sid will be added to common context:
+```
+test("Add new car",  async ({request}) => {
+    const authResponse = await request.post("/api/auth/signin", {data: {
+        "email": testUser1.email,
+        "password": testUser1.password,
+        "remember": false
+    }});
+    expect(authResponse.status()).toBe(200);
+
+    const addNewCarResponse = await request.post("/api/cars", {data: {
+        "carBrandId": 3,
+        "carModelId": 11,
+        "mileage": 123
+    }});
+    console.log(addNewCarResponse);
+    expect(addNewCarResponse.status()).toBe(201);
+})
+```
+
+To make less request, one request with login could be made in beforeAll.
+There we save sid.
+And in tests it would be set in headers:
+```
+test.describe('Private requests', () => {
+    let sid: string;
+
+    test.beforeAll(async ({ request }) => {
+        const responseAuth = await request.post('api/auth/signin', {
+            data: {
+                'email': testUser1.email,
+                'password': testUser1.password,
+            }
+        });
+
+        sid = responseAuth.headers()['set-cookie'].split(';')[0];
+
+        expect(responseAuth.status()).toBe(200);
+        expect(sid).toContain('sid=');
+    })
+
+...
+
+        test('Add new car - Ford Fiesta', async ({ request }) => {
+            const newCar = {
+                'carBrandId': 3,
+                'carModelId': 11,
+                'mileage': 123
+            }
+
+            const response = await request.post('/api/cars/', {
+                data: newCar,
+                headers: {
+                    'cookie': sid
+                }
+            });
+```
+
+To remove entities after tests for creation, collect all created IDs in describe-level variable and then in for-of loop remove them.
+
+JSON.stringify(obj) - to print object as JSON.
+
+qauto.forstudy.space swagger
+https://qauto.forstudy.space/api-docs/
+
+API testing
+https://playwright.dev/docs/api-testing#authentication
+
+Authorization header
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization
+
+HTTP authentication
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication
