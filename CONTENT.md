@@ -940,3 +940,51 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorizatio
 
 HTTP authentication
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication
+
+
+# 33 Більш просунута структура API тестів
+## Services (Controllers)
+Logic of sending requests could be moved to separate files:
+```
+import { APIRequestContext, expect } from "@playwright/test";
+
+export default class GarageService {
+
+    private request: APIRequestContext;
+
+    constructor(request: APIRequestContext) {
+        this.request = request;
+    }
+
+
+    async removeCar(sid: string, id: string, isPositive: boolean = true) {
+        const response = await this.request.delete(`/api/cars/${id}`, {
+            headers: {
+                'cookie': sid
+            }
+        });
+
+        if (isPositive) {
+            return response;
+
+        } else {
+            const responseJson = await response.json();
+            return responseJson.data;
+        }
+    }
+}
+```
+
+
+
+## Data factories
+To shorten tests, creatingf objects for tests could be moved from tests to separate function:
+```
+export function generateNewCar(carBrandId: number, carModelId: number, mileage: number) {
+    return {
+        carBrandId,
+        carModelId,
+        mileage
+    }
+}
+```
