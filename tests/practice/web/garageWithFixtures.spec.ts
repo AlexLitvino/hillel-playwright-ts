@@ -1,0 +1,57 @@
+import { expect } from "@playwright/test";
+
+import { test } from "../../../utils/fixtures/pagesFixtures";
+
+test.describe('Garage tests', () => {
+
+    test.use({ storageState: '.states/testuser1.json' });
+
+    test.beforeEach(async ({ app }) => {
+        await app.garagePage.navigate();
+        await app.garagePage.openAddCarForm();
+    })
+
+    test.describe('Adding cars', () => {
+        test('Add new car - BMW X5', async ({ app }) => {
+            await app.addCarForm.addNewCar('BMW', 'X5', '999');
+            //await app.page.pause();
+            await app.garagePage.verifyCarIsAdded('BMW X5', '999');
+        })
+
+        test('Add new car - Audi Q7', async ({ app }) => {
+            test.step("Adding Audi Q7 with 999 miles", async () => {
+                await app.addCarForm.addNewCar('Audi', 'Q7', '999');
+            })
+            test.step("Verifying that Audi Q7 with 999 miles is added", async () => {
+                await app.garagePage.verifyCarIsAdded('Audi Q7', '999');
+            })
+            await expect(app.page.locator('.car-item').first()).toHaveScreenshot("last-added-audi-q7.png", {mask: [app.page.locator('[name="miles"]')]});
+            // await app.page.screenshot({path: 'AddedCar.png', fullPage: true});
+            // await app.page.locator('.car-item').first().screenshot({path: "Audi Q7.png"});
+        })
+
+        test.afterEach(async ({ app }) => {
+            await app.garagePage.openEditCarForm(0);
+            await app.editCarForm.removeOpenCar();
+            await app.garagePage.verifyCarIsRemoved();
+        })
+    })
+
+    test('Add new car without mileage', async ({ app }) => {
+        await app.addCarForm.selectBrand('BMW');
+        await app.addCarForm.selectModel('X5');
+        await expect(app.addCarForm.addCarButton).toBeDisabled();
+        await expect(app.page).toHaveScreenshot("add-car-no-milage-page.png");
+    })
+
+    test('Close "Add a car" form via "Cancel" button', async ({ app }) => {
+        await app.addCarForm.clickCancelButton();
+        await expect(app.addCarForm.formTitle).not.toBeVisible();
+    })
+
+    test('Close "Add a car" form via close icon', async ({ app }) => {
+        await app.addCarForm.clickCloseIcon();
+        await expect(app.addCarForm.formTitle).not.toBeVisible();
+    })
+
+})

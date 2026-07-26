@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { testUser1 } from "../../test-data/users";
+import { testUser1 } from "../../../test-data/users";
 
 test("Sign In", async ({request}) => {
     const response = await request.post("/api/auth/signin", {data: {

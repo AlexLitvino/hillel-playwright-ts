@@ -1,5 +1,5 @@
 import test, { expect } from "@playwright/test";
-import { testUser1 } from "../../test-data/users";
+import { testUser1 } from "../../../test-data/users";
 
 test.describe('Get brands and models', () => {
     test('Get all brands', async ({ request }) => {
