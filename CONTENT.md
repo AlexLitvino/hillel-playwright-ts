@@ -975,8 +975,6 @@ export default class GarageService {
 }
 ```
 
-
-
 ## Data factories
 To shorten tests, creatingf objects for tests could be moved from tests to separate function:
 ```
@@ -988,3 +986,31 @@ export function generateNewCar(carBrandId: number, carModelId: number, mileage: 
     }
 }
 ```
+
+
+# 34 Рефакторинг, pre- & post-conditions за допомогою API
+Playwright runs tests in alphabetical order.
+
+For setup files `fullyParallel: false` or `workers: 1` could be used.
+
+test could be renamed to setup for setup files:
+```
+import { test as setup } from "@playwright/test";
+```
+
+For preconditions (as setup files) could be used:
+- deleting existing data (users)
+- creating clear users
+- saving session id
+
+Fixtures
+https://playwright.dev/docs/test-fixtures
+
+Global setup and teardown
+https://playwright.dev/docs/test-global-setup-teardown
+
+Best Practices
+https://playwright.dev/docs/best-practices
+
+Parallelism
+https://playwright.dev/docs/test-parallel

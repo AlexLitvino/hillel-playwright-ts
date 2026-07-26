@@ -1,9 +1,9 @@
 import test, { expect } from "@playwright/test";
-import { GaragePage } from "../pom/pages/GaragePage";
-import { HomePage } from "../pom/pages/HomePage";
-import { SignInForm } from "../pom/forms/SignInForm";
-import { AddCarForm } from "../pom/forms/AddCarForm";
-import { testUser1 } from "../test-data/users";
+import { GaragePage } from "../../../pom/pages/GaragePage";
+import { HomePage } from "../../../pom/pages/HomePage";
+import { SignInForm } from "../../../pom/forms/SignInForm";
+import { AddCarForm } from "../../../pom/forms/AddCarForm";
+import { testUser1 } from "../../../test-data/users";
 
 test.describe('Garage tests', () => {
     let garagePage: GaragePage;

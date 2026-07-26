@@ -1,4 +1,5 @@
 import test from "@playwright/test";
+import {testUser1} from "../../../test-data/users"
 
 test.describe("Actions with elements", () => {
 
@@ -45,8 +46,8 @@ test.describe("Actions with elements", () => {
     test('dropdowns', async ({ page }) => {
         // Correct email and password
         await page.getByText('Sign In').click();
-        await page.locator('#signinEmail').fill('michael.krasnovskyi+testUser1@gmail.com');
-        await page.locator('#signinPassword').fill('ZSgeVQhuU3qkvlG');
+        await page.locator('#signinEmail').fill(testUser1.email);
+        await page.locator('#signinPassword').fill(testUser1.password);
         await page.getByText('Login').click();
         await page.getByText('Add car').click();
         await page.locator('#addCarBrand').selectOption({ label: 'Fiat' });

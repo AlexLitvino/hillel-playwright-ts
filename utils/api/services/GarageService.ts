@@ -69,7 +69,18 @@ export default class GarageService {
 
         const addedCar = responseJson.data;
         return addedCar;
+    }
 
+    async getUserCars(sid: string) {
+        const response = await this.request.get('/api/cars', {
+            headers: {
+                'cookie': sid
+            }
+        })
+
+        expect(response.status()).toBe(200);
+        return response.json();
 
     }
+    
 }
