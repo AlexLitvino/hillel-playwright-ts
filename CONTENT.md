@@ -1014,3 +1014,20 @@ https://playwright.dev/docs/best-practices
 
 Parallelism
 https://playwright.dev/docs/test-parallel
+
+
+# 35 Практика - 15 нових тестів, використання Faker, завантаження файлів та фабрики даних
+To generate random realistic values use faker-js/faker library.
+
+To upload file to input field setInputFiles method is used:
+```
+    async addPhoto(imagePath: string) {
+        await this.photoField.setInputFiles(imagePath);
+    }
+```
+
+
+
+@faker-js/faker
+https://www.npmjs.com/package/@faker-js/faker
+
