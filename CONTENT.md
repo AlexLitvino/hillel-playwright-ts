@@ -1026,8 +1026,56 @@ To upload file to input field setInputFiles method is used:
     }
 ```
 
-
-
 @faker-js/faker
 https://www.npmjs.com/package/@faker-js/faker
 
+
+# 36 CI/CD + Docker basics
+CI - regular change merge in common branch with automatic build and test
+CD - automation of change delivery from test to production
+
+CI/CD tools:
+- GitHub Actions
+- GitLab CI/CD
+- Jenkins
+- CircleCI / Travis CI
+
+```
+docker run -it -v .:/tests alpine sh
+```
+
+To update Playwright:
+```
+npm install @playwright/test@latest
+```
+
+To update browsers:
+```
+npx playwright install
+```
+
+To start container with mounted folder
+```
+docker run -it -v .:/playwright-tests mcr.microsoft.com/playwright:v1.62.0-noble sh
+```
+
+To run tests
+```
+npx playwright test --project=e2e
+```
+
+To build docker image
+```
+docker build -t playwright-tests .
+```
+
+To start container with tests
+```
+docker run playwright-tests
+```
+
+Docker Get started
+https://docs.docker.com/get-started/
+
+Playwright + Docker
+https://playwright.dev/docs/docker
