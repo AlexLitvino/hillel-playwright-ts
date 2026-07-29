@@ -1,32 +1,25 @@
-name: Playwright Tests (VM)
+name: Playwright Tests (Playwright Docker image)
 
 on:
-  # push:
-  #   branches: [main, lesson37]
+  push:
+    branches: [main, lesson37]
   workflow_dispatch:
-
-env:
-  HTTP_USERNAME: ${{ secrets.HTTP_USERNAME }}
-  HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }} 
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+    env:
+       HTTP_USERNAME: ${{ secrets.HTTP_USERNAME }}
+       HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
 
       - name: Run Playwright tests
         run: npx playwright test --project=e2e
