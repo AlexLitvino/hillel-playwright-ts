@@ -1119,3 +1119,13 @@ https://docs.gitlab.com/ci/yaml/
 
 Playwright with GitLab CI
 https://playwright.dev/docs/ci#gitlab-ci
+
+
+# 39 Висновки. Що робити далі та як перейти у автоматизацію
+In current project you could start with smoke suite automation.
+Or pet-project on free web-sites and API.
+
+Advices:
+- Do refactoring, do not good from the first time
+- Read other's repository
+
