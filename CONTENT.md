@@ -1079,3 +1079,12 @@ https://docs.docker.com/get-started/
 
 Playwright + Docker
 https://playwright.dev/docs/docker
+
+
+# 37 GitHub Actions - налаштування, запуск тестів та репорти
+`npm ci` command uses package-lock.json file and doesn't change packages version.
+`npm install` uses package.json and could use higher versions of packages.
+
+To publish report to GitHub Pages, on https://github.com/AlexLitvino/hillel-playwright-ts/settings/pages Source set to GitHub Actions.
+After successful deploy there will be link to GitHub Pages: https://alexlitvino.github.io/hillel-playwright-ts/
+
