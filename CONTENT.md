@@ -1103,3 +1103,19 @@ https://playwright.dev/docs/ci#github-actions
 
 Store and share data with workflow artifacts
 https://docs.github.com/en/actions/tutorials/store-and-share-data
+
+
+# 38 GitLab CI - налаштування, запуск тестів та репорти
+On GitLab link to pages located at: Deploy -> Pages
+
+Job with exact name `pages` is served for publishing static data to GitLab Pages.
+Static data should be placed in directory with name `public`
+
+Get started with GitLab CI/CD
+https://docs.gitlab.com/ci/
+
+CI/CD YAML syntax reference
+https://docs.gitlab.com/ci/yaml/
+
+Playwright with GitLab CI
+https://playwright.dev/docs/ci#gitlab-ci
