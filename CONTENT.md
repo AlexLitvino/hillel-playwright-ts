@@ -1088,3 +1088,18 @@ https://playwright.dev/docs/docker
 To publish report to GitHub Pages, on https://github.com/AlexLitvino/hillel-playwright-ts/settings/pages Source set to GitHub Actions.
 After successful deploy there will be link to GitHub Pages: https://alexlitvino.github.io/hillel-playwright-ts/
 
+## GitHub Actions annotations in Playwright
+Special reporter `github` could be used for CI:
+```
+reporter: process.env.CI ? 'github' : 'list',
+```
+It is convenient for Pull Request as will display errors on PR page.
+
+GitHub Actions Docs
+https://docs.github.com/en/actions
+
+Playwright CI Setup
+https://playwright.dev/docs/ci#github-actions
+
+Store and share data with workflow artifacts
+https://docs.github.com/en/actions/tutorials/store-and-share-data
